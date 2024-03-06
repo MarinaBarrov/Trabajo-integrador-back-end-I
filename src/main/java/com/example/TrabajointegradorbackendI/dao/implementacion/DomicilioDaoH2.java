@@ -1,9 +1,12 @@
-package dao.implementacion;
+package com.example.TrabajointegradorbackendI.dao.implementacion;
 
-import com.dh.ClinicMVC.dao.BD;
-import com.dh.ClinicMVC.dao.IDao;
-import com.dh.ClinicMVC.model.Domicilio;
-import org.apache.log4j.Logger;
+
+
+
+
+import com.example.TrabajointegradorbackendI.dao.BD;
+import com.example.TrabajointegradorbackendI.dao.IDao;
+import com.example.TrabajointegradorbackendI.model.Domicilio;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,14 +17,13 @@ import java.util.List;
 
 public class DomicilioDaoH2 implements IDao<Domicilio> {
 
-    private static final Logger LOGGER = Logger.getLogger(DomicilioDaoH2.class);
+
 
     private static final String INSERT_DOMICILIO = "INSERT INTO DOMICILIOS (CALLE, NUMERO, LOCALIDAD, PROVINCIA) VALUES (?,?,?,?)";
     private static final String SELECT_ALL = "SELECT * FROM DOMICILIOS";
 
     @Override
     public Domicilio guardar(Domicilio domicilio) {
-        LOGGER.info("Estamos guardando un domicilio");
         Connection connection = null;
 
         try {
@@ -49,7 +51,6 @@ public class DomicilioDaoH2 implements IDao<Domicilio> {
                 e.printStackTrace();
             }
         }
-        LOGGER.info("Este es el id: " + domicilio.getId());
         return domicilio;
     }
 
@@ -70,7 +71,6 @@ public class DomicilioDaoH2 implements IDao<Domicilio> {
 
     @Override
     public List<Domicilio> listarTodos() {
-        LOGGER.info("Estamos consultando todos los domicilios");
         Connection connection = null;
         List<Domicilio> domicilioList = new ArrayList<>();
         Domicilio domicilio = null;
@@ -90,7 +90,6 @@ public class DomicilioDaoH2 implements IDao<Domicilio> {
             }
 
         } catch (Exception e) {
-            LOGGER.error("Error: " + e.getMessage());
             e.printStackTrace();
         } finally {
             try {
@@ -99,7 +98,6 @@ public class DomicilioDaoH2 implements IDao<Domicilio> {
                 e.printStackTrace();
             }
         }
-        LOGGER.info("Esta es la lista que se está devolviendo??? " + domicilioList);
         return domicilioList;
     }
 }

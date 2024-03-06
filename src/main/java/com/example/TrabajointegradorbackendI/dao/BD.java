@@ -1,14 +1,10 @@
-package dao;
-
-import org.apache.log4j.Logger;
+package com.example.TrabajointegradorbackendI.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
 
 public class BD {
-
-    private static final Logger LOGGER = Logger.getLogger(BD.class);
     private static final String SQL_DROP_CREATE_DOMICILIOS = "DROP TABLE IF EXISTS " +
             "DOMICILIOS; CREATE TABLE DOMICILIOS (ID INT AUTO_INCREMENT PRIMARY KEY," +
             " CALLE VARCHAR(100) NOT NULL," +

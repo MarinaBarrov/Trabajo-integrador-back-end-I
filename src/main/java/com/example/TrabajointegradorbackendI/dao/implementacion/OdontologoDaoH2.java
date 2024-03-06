@@ -1,9 +1,7 @@
-package dao.implementacion;
-
-import com.dh.ClinicMVC.dao.BD;
-import com.dh.ClinicMVC.dao.IDao;
-import com.dh.ClinicMVC.model.Odontologo;
-import org.apache.log4j.Logger;
+package com.example.TrabajointegradorbackendI.dao.implementacion;
+import com.example.TrabajointegradorbackendI.dao.BD;
+import com.example.TrabajointegradorbackendI.dao.IDao;
+import com.example.TrabajointegradorbackendI.model.Odontologo;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -11,14 +9,14 @@ import java.util.List;
 
 public class OdontologoDaoH2 implements IDao<Odontologo> {
 
-    private static final Logger LOGGER = Logger.getLogger(OdontologoDaoH2.class);
+
 
     private static final String INSERT_ODONTOLOGOS = "INSERT INTO ODONTOLOGOS (NOMBRE, APELLIDO, MATRICULA) VALUES (?,?,?)";
     private static final String SELECT_ALL = "SELECT * FROM ODONTOLOGOS";
     private static final String SELECT_BY_ID = "SELECT * FROM ODONTOLOGOS WHERE ID = ?";
     @Override
     public Odontologo guardar(Odontologo odontologo) {
-        LOGGER.info("Estamos guardando un odontologo");
+
         Connection connection = null;
 
         try {
@@ -90,7 +88,7 @@ public class OdontologoDaoH2 implements IDao<Odontologo> {
 
     @Override
     public List<Odontologo> listarTodos() {
-        LOGGER.info("Estamos consultando todos los Odontologos.");
+
         Connection conexion = null;
         List<Odontologo>  listaOdontologos = new ArrayList<>();
         Odontologo odontologo =  null;

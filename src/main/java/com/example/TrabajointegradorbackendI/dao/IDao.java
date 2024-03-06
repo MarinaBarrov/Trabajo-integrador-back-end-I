@@ -1,4 +1,4 @@
-package dao;
+package com.example.TrabajointegradorbackendI.dao;
 
 import java.util.List;
 

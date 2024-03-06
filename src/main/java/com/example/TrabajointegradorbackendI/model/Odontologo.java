@@ -1,4 +1,4 @@
-package model;
+package com.example.TrabajointegradorbackendI.model;
 
 public class Odontologo {
     private Integer id;
