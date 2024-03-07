@@ -1,5 +1,6 @@
 package com.example.TrabajointegradorbackendI.model;
 
+import java.sql.Date;
 import java.time.LocalDate;
 
 public class Paciente {
@@ -8,7 +9,7 @@ public class Paciente {
     private String apellido;
     private String dni;
     private LocalDate fechaIngreso;
-    private Domicilio domicilio;
+    private String domicilio;
 
     public Paciente(Integer id, String nombre, String apellido, String dni, LocalDate fechaAlta, Domicilio domicilio) {
         this.id = id;
@@ -16,7 +17,7 @@ public class Paciente {
         this.apellido = apellido;
         this.dni = dni;
         this.fechaIngreso = fechaAlta;
-        this.domicilio = domicilio;
+        this.domicilio = String.valueOf(domicilio);
     }
 
     public Paciente() {
@@ -54,7 +55,7 @@ public class Paciente {
         this.dni = dni;
     }
 
-    public LocalDate getFechaIngreso() {
+    public Date getFechaIngreso() {
         return fechaIngreso;
     }
 
@@ -62,11 +63,11 @@ public class Paciente {
         this.fechaIngreso = fechaIngreso;
     }
 
-    public Domicilio getDomicilio() {
+    public String getDomicilio() {
         return domicilio;
     }
 
-    public void setDomicilio(Domicilio domicilio) {
+    public void setDomicilio(String domicilio) {
         this.domicilio = domicilio;
     }
 }

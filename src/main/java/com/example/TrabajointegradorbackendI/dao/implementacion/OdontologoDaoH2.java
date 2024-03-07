@@ -1,6 +1,7 @@
 package com.example.TrabajointegradorbackendI.dao.implementacion;
 import com.example.TrabajointegradorbackendI.dao.BD;
 import com.example.TrabajointegradorbackendI.dao.IDao;
+import com.example.TrabajointegradorbackendI.model.Domicilio;
 import com.example.TrabajointegradorbackendI.model.Odontologo;
 
 import java.sql.*;
@@ -14,6 +15,10 @@ public class OdontologoDaoH2 implements IDao<Odontologo> {
     private static final String INSERT_ODONTOLOGOS = "INSERT INTO ODONTOLOGOS (NOMBRE, APELLIDO, MATRICULA) VALUES (?,?,?)";
     private static final String SELECT_ALL = "SELECT * FROM ODONTOLOGOS";
     private static final String SELECT_BY_ID = "SELECT * FROM ODONTOLOGOS WHERE ID = ?";
+    private static final String DELETE = "DELETE * FROM ODONTOLOGOS WHERE ID=?";
+    private static final String UPDATE = "UPDATE ODONTOLOGOS SET NOMBRE=? WHERE ID=?";
+
+
     @Override
     public Odontologo guardar(Odontologo odontologo) {
 
@@ -53,7 +58,7 @@ public class OdontologoDaoH2 implements IDao<Odontologo> {
         try {
             conexion = BD.getConnection();
             PreparedStatement psSearchByID =  conexion.prepareStatement(SELECT_BY_ID);
-            psSearchByID.setInt(1, id);
+            psSearchByID.setInt(1, odontologo.getId());
             ResultSet rs  = psSearchByID.executeQuery();
 
             while (rs.next()){
@@ -78,11 +83,58 @@ public class OdontologoDaoH2 implements IDao<Odontologo> {
 
     @Override
     public void eliminar(Integer id) {
+        Connection connection = null;
+        Odontologo odontologo = null;
 
+        try {
+            connection = BD.getConnection();
+
+            PreparedStatement pStmt = connection.prepareStatement(DELETE);
+            pStmt.setInt(1, odontologo.getId());
+            pStmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                connection.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override
     public void actualizar(Odontologo odontologo) {
+        Connection connection = null;
+        try {
+
+            connection = BD.getConnection();
+
+            PreparedStatement pStmt1 = connection.prepareStatement(UPDATE);
+            pStmt1.setString(1, "321MP");
+            pStmt1.setInt(2, 1);
+
+            pStmt1.executeUpdate();
+
+
+            ResultSet rs1 = pStmt1.executeQuery(SELECT_ALL);
+
+
+            while (rs1.next()) {
+                System.out.println(" Odontologo" + rs1.getString(2));
+            }
+
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                connection.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
 
     }
 
