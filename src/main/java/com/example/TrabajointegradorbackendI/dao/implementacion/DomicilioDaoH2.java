@@ -26,6 +26,7 @@ public class DomicilioDaoH2 implements IDao<Domicilio> {
         try {
 
             connection = BD.getConnection();
+
             PreparedStatement psInsert = connection.prepareStatement(INSERT_DOMICILIO, Statement.RETURN_GENERATED_KEYS);
             psInsert.setString(1, domicilio.getCalle());
             psInsert.setInt(2, domicilio.getNumero());
@@ -58,8 +59,10 @@ public class DomicilioDaoH2 implements IDao<Domicilio> {
         Domicilio domicilio = null;
         try {
             conexion = BD.getConnection();
+
             PreparedStatement psSearchByID = conexion.prepareStatement(SELECT_BY_ID);
             psSearchByID.setInt(1, id);
+
             ResultSet rs = psSearchByID.executeQuery();
 
             while (rs.next()) {
@@ -86,13 +89,12 @@ public class DomicilioDaoH2 implements IDao<Domicilio> {
     @Override
     public void eliminar(Integer id) {
         Connection connection = null;
-        Domicilio domicilio = null;
 
         try {
             connection = BD.getConnection();
 
             PreparedStatement pStmt = connection.prepareStatement(DELETE);
-            pStmt.setInt(1, domicilio.getId());
+            pStmt.setInt(1, id);
             pStmt.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -115,8 +117,8 @@ public class DomicilioDaoH2 implements IDao<Domicilio> {
             connection = BD.getConnection();
 
             PreparedStatement pStmt1 = connection.prepareStatement(UPDATE);
-            pStmt1.setString(1, "321MP");
-            pStmt1.setInt(2, 1);
+            pStmt1.setString(1, domicilio.getCalle());
+            pStmt1.setInt(2, domicilio.getId());
 
             pStmt1.executeUpdate();
 
@@ -125,7 +127,7 @@ public class DomicilioDaoH2 implements IDao<Domicilio> {
 
 
             while (rs1.next()) {
-                System.out.println(" Domicilio" + rs1.getString(2));
+                System.out.println(" Domicilio actualizado" + rs1.getString(2));
             }
 
 
@@ -145,19 +147,17 @@ public class DomicilioDaoH2 implements IDao<Domicilio> {
     public List<Domicilio> listarTodos() {
         Connection connection = null;
         List<Domicilio> domicilioList = new ArrayList<>();
-        Domicilio domicilio = null;
 
         try {
             connection = BD.getConnection();
+
             PreparedStatement psSelect = connection.prepareStatement(SELECT_ALL);
             ResultSet rs = psSelect.executeQuery();
 
             while (rs.next()) {
-                //completamos el domicilio
-                domicilio = new Domicilio(rs.getInt(1), rs.getString(2), rs.getInt(3),
-                        rs.getString(4), rs.getString(5));
+                Domicilio domicilio = null;
+                domicilio = new Domicilio(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getString(5));
 
-                //lo guardamos en la lista
                 domicilioList.add(domicilio);
             }
 

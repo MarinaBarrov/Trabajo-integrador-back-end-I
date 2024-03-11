@@ -28,9 +28,10 @@ public class BD {
             " MATRICULA VARCHAR(100) NOT NULL)";
 
 
+
     public static Connection getConnection() throws Exception {
         Class.forName("org.h2.Driver");
-        return DriverManager.getConnection("jdbc:h2:./ClinicMVC",
+        return DriverManager.getConnection("jdbc:h2:./trabajoIntegrador", // TODO: capaz es mejor usar '~' para que pueads conectarte desde el db manager de h2
                 "sa", "sa");
     }
 

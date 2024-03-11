@@ -1,4 +1,5 @@
 package com.example.TrabajointegradorbackendI.dao.implementacion;
+
 import com.example.TrabajointegradorbackendI.dao.BD;
 import com.example.TrabajointegradorbackendI.dao.IDao;
 import com.example.TrabajointegradorbackendI.model.Domicilio;
@@ -9,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OdontologoDaoH2 implements IDao<Odontologo> {
-
 
 
     private static final String INSERT_ODONTOLOGOS = "INSERT INTO ODONTOLOGOS (NOMBRE, APELLIDO, MATRICULA) VALUES (?,?,?)";
@@ -39,12 +39,12 @@ public class OdontologoDaoH2 implements IDao<Odontologo> {
                 odontologo.setId(rs.getInt(1));
             }
 
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         } finally {
             try {
                 connection.close();
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
@@ -57,11 +57,11 @@ public class OdontologoDaoH2 implements IDao<Odontologo> {
         Odontologo odontologo = null;
         try {
             conexion = BD.getConnection();
-            PreparedStatement psSearchByID =  conexion.prepareStatement(SELECT_BY_ID);
-            psSearchByID.setInt(1, odontologo.getId());
-            ResultSet rs  = psSearchByID.executeQuery();
+            PreparedStatement psSearchByID = conexion.prepareStatement(SELECT_BY_ID);
+            psSearchByID.setInt(1, id);
+            ResultSet rs = psSearchByID.executeQuery();
 
-            while (rs.next()){
+            while (rs.next()) {
                 odontologo = new Odontologo();
                 odontologo.setId(rs.getInt(1));
                 odontologo.setNombre(rs.getString(2));
@@ -69,9 +69,9 @@ public class OdontologoDaoH2 implements IDao<Odontologo> {
                 odontologo.setMatricula(rs.getString(4));
             }
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             try {
                 conexion.close();
             } catch (SQLException e) {
@@ -84,13 +84,12 @@ public class OdontologoDaoH2 implements IDao<Odontologo> {
     @Override
     public void eliminar(Integer id) {
         Connection connection = null;
-        Odontologo odontologo = null;
 
         try {
             connection = BD.getConnection();
 
             PreparedStatement pStmt = connection.prepareStatement(DELETE);
-            pStmt.setInt(1, odontologo.getId());
+            pStmt.setInt(1, id);
             pStmt.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -111,7 +110,7 @@ public class OdontologoDaoH2 implements IDao<Odontologo> {
             connection = BD.getConnection();
 
             PreparedStatement pStmt1 = connection.prepareStatement(UPDATE);
-            pStmt1.setString(1, "321MP");
+            pStmt1.setString(1, odontologo.getNombre());
             pStmt1.setInt(2, 1);
 
             pStmt1.executeUpdate();
@@ -142,21 +141,26 @@ public class OdontologoDaoH2 implements IDao<Odontologo> {
     public List<Odontologo> listarTodos() {
 
         Connection conexion = null;
-        List<Odontologo>  listaOdontologos = new ArrayList<>();
-        Odontologo odontologo =  null;
+        List<Odontologo> listaOdontologos = new ArrayList<>();
+
         try {
             conexion = BD.getConnection();
             PreparedStatement psUpdateById = conexion.prepareStatement(SELECT_ALL);
             ResultSet rs = psUpdateById.executeQuery();
 
-            while (rs.next())  {
-                odontologo = new Odontologo(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4));
+            while (rs.next()) {
+                Odontologo odontologo = null;
+                odontologo = new Odontologo();
+                odontologo.setId(rs.getInt(1));
+                odontologo.setNombre(rs.getString(2));
+                odontologo.setApellido(rs.getString(3));
+                odontologo.setMatricula(rs.getString(4));
 
                 listaOdontologos.add(odontologo);
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             try {
                 conexion.close();
             } catch (SQLException e) {

@@ -9,7 +9,7 @@ public class Paciente {
     private String apellido;
     private String dni;
     private LocalDate fechaIngreso;
-    private String domicilio;
+    private Domicilio domicilio;
 
     public Paciente(Integer id, String nombre, String apellido, String dni, LocalDate fechaAlta, Domicilio domicilio) {
         this.id = id;
@@ -17,7 +17,7 @@ public class Paciente {
         this.apellido = apellido;
         this.dni = dni;
         this.fechaIngreso = fechaAlta;
-        this.domicilio = String.valueOf(domicilio);
+        this.domicilio = domicilio;
     }
 
     public Paciente() {
@@ -55,7 +55,7 @@ public class Paciente {
         this.dni = dni;
     }
 
-    public Date getFechaIngreso() {
+    public LocalDate getFechaIngreso() {
         return fechaIngreso;
     }
 
@@ -63,11 +63,18 @@ public class Paciente {
         this.fechaIngreso = fechaIngreso;
     }
 
-    public String getDomicilio() {
+    public Domicilio getDomicilio() {
         return domicilio;
     }
 
-    public void setDomicilio(String domicilio) {
+    public void setDomicilio(Domicilio domicilio) {
         this.domicilio = domicilio;
     }
+
+    public void setFechaIngreso(int i, Date date) {
+    }
+
+    public void setInt(int i, Integer id) {
+    }
 }
+

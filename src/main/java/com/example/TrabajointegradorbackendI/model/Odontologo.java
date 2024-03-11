@@ -16,6 +16,12 @@ public class Odontologo {
         this.matricula = matricula;
     }
 
+    public Odontologo(String nombre, String apellido, String matricula) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.matricula = matricula;
+    }
+
     public Integer getId() {
         return id;
     }
